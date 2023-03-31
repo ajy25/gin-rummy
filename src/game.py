@@ -4,7 +4,7 @@ from .cards.hand import Hand
 from .cards.card import Card
 from .cards.cardinfo import Suit, Value
 import mysql.connector
-import copy
+import copy, random
 
 
 class Game:
@@ -27,9 +27,10 @@ class Game:
     p2_tally: int = None
     round_num: int = None
     round_complete: bool = None
+    turn: int = None
 
     def __init__(self, cursor, id: int, db_name: str, \
-        cardtable_name, scoretable_name: str):
+        cardtable_name: str, scoretable_name: str):
         '''Deals cards to p1, p2. Then, discards top card from deck.'''
 
         self.cursor = cursor
@@ -51,6 +52,7 @@ class Game:
         self.deck.deal(self.p1, self.p2)
         self.p1.sort_cards(by='suit')
         self.p2.sort_cards(by='suit')
+        self.turn = random.randint(1, 2)
 
         # take one card from top of deck and move to discard pile
         self.discard.add_to_top(self.deck.draw())
@@ -174,6 +176,9 @@ class Game:
             return
 
         if player_num == 1:
+            if self.turn != 1:
+                raise Exception("It is not player 1's turn.")
+
             if draw_option == 'deck':
                 self.p1.add_to_top(self.deck.draw())
             elif draw_option == 'discard':
@@ -181,6 +186,9 @@ class Game:
             else:
                 raise Exception('Invalid input for draw_option.')
         elif player_num == 2:
+            if self.turn != 2:
+                raise Exception("It is not player 2's turn.")
+
             if draw_option == 'deck':
                 self.p2.add_to_top(self.deck.draw())
             elif draw_option == 'discard':
@@ -206,11 +214,19 @@ class Game:
         '''
 
         if player_num == 1:
+            if self.turn != 1:
+                raise Exception("It is not player 1's turn.")
+            else:
+                self.turn = 2
             if discard_idx in range(11):
                 self.discard.add_to_top(self.p1.remove_card_by_idx(discard_idx))
             else:
                 raise Exception('Length of stack not equal to 11.')
         elif player_num == 2:
+            if self.turn != 2:
+                raise Exception("It is not player 2's turn.")
+            else:
+                self.turn = 1
             if discard_idx in range(11):
                 self.discard.add_to_top(self.p2.remove_card_by_idx(discard_idx))
             else:
@@ -226,14 +242,22 @@ class Game:
         
         Parameters:
             - player_num: integer (either 1 or 2) representing player number
-            - card: Card to ge removed
+            - card: Card to get removed
 
         Returns:
             - None
         '''
         if player_num == 1:
+            if self.turn != 1:
+                raise Exception("It is not player 1's turn.")
+            else:
+                self.turn = 2
             self.discard.add_to_top(self.p1.remove_card(card))
         elif player_num == 2:
+            if self.turn != 2:
+                raise Exception("It is not player 2's turn.")
+            else:
+                self.turn = 1
             self.discard.add_to_top(self.p2.remove_card(card))
         else:
             raise Exception('Invalid input for player_num.')
@@ -278,8 +302,6 @@ class Game:
         Parameters:
             - player_num: integer (either 1 or 2) representing player number
         '''
-
-        deadwood = 0
 
         if knocking_player_num == 1:
             print('\nPlayer 1 has knocked.\n')

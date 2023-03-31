@@ -1,0 +1,27 @@
+body {
+    background-color: lightblue;
+}
+
+h1 {
+    border: 2px #eee solid;
+    color: brown;
+    text-align: center;
+    padding: 10px;
+}
+
+table {
+    width: 50%;
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    color: brown;
+    text-align: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}

@@ -1,3 +1,8 @@
+import os, sys
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(f'{dir_path}/../src')
+
+
 from cards.discard import Discard
 from cards.deck import Deck
 from cards.hand import Hand
@@ -117,6 +122,4 @@ def test_score_info():
 
 
 if __name__ == '__main__':
-    
-
     test_score_info()

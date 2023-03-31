@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gin Rummy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+<div>
+
+    <h1>Gin Rummy - Player {{ ginfo['playernum'] }}</h1>
+
+</div>
+<div>
+    <p>Player {{ ginfo['playernum'] }}'s cards</p>
+    <table>
+        <tr>
+            <th>Face Value</th>
+            <th>Suit</th>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card0face'] }}</td>
+            <td>{{ ginfo['card0suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card1face'] }}</td>
+            <td>{{ ginfo['card1suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card2face'] }}</td>
+            <td>{{ ginfo['card2suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card3face'] }}</td>
+            <td>{{ ginfo['card3suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card4face'] }}</td>
+            <td>{{ ginfo['card4suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card5face'] }}</td>
+            <td>{{ ginfo['card5suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card6face'] }}</td>
+            <td>{{ ginfo['card6suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card7face'] }}</td>
+            <td>{{ ginfo['card7suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card8face'] }}</td>
+            <td>{{ ginfo['card8suit'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ ginfo['card9face'] }}</td>
+            <td>{{ ginfo['card9suit'] }}</td>
+        </tr>
+    </table>
+    <!-- <img src="/static/card_images/2_of_clubs.png" alt="not found" height=361 width=250></img>
+    <img src="/static/card_images/3_of_clubs.png" alt="not found" height=361 width=250></img> -->
+</div>
+<div>
+    <p>Player {{ ginfo['playernum'] }}'s cards</p>
+    <table>
+        <tr>
+            <th>Your Score</th>
+            <th>Opponent's Score</th>
+        </tr>
+        <tr>
+            <td>{{ ginfo['selfscore'] }}</td>
+            <td>{{ ginfo['oppscore'] }}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

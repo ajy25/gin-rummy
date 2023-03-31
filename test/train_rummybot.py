@@ -4,10 +4,11 @@ sys.path.append(f'{dir_path}/../')
 
 from src.rummybot import RummyBot
 from src.game import Game
-from src import db_ops
+from src.db_ops import DBOperator
 
 class TrainRummyBot:
 
+    
     db_name, cardtable_name, scoretable_name = None, None, None
 
     g: Game = None
@@ -17,6 +18,7 @@ class TrainRummyBot:
     def __init__(self):
         self.db_name, self.cardtable_name, self.scoretable_name = \
             'test_sql', 'ginrummycards', 'ginrummyscores'
+
 
         db_ops.setup(self.db_name, self.cardtable_name, self.scoretable_name)
 

@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gin Rummy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+<div>
+
+    <h1>Gin Rummy - Player {{ ginfo['playernum'] }}</h1>
+
+</div>
+
+<div>
+    <p>It's your turn. Please select a card from your hand to discard.</p>
+</div>
+
+<div class="center">
+    <form method="post" action="{{ url_for('player_decision', gameID=ginfo['gameID'], gametype='rummybot') }}">
+    {% for i in range(ginfo['cards']|length) %}
+        <input type="image" src="/static/card_images/{{ ginfo['cards'][i] }}.png" 
+        alt="{{ ginfo['cards'][i] }}" width="62" height="90" value="card{{ i }}" 
+        name="card{{ i }}form"/>
+    {% endfor %}
+    </form> 
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>Your Deadwood</th>
+            <th>Your Score</th>
+            <th>Opponent's Score</th>
+        </tr>
+        <tr>
+            <td>{{ ginfo['deadwood'] }}
+            <td>{{ ginfo['selfscore'] }}</td>
+            <td>{{ ginfo['oppscore'] }}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
